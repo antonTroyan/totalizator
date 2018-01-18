@@ -1,0 +1,83 @@
+.event-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.event-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.event-live {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    border-bottom: 1px solid #4a4949;
+    border-top: 1px solid #4a4949;
+}
+
+time {
+    font-size: 0.7em;
+}
+
+.register-warn-div {
+    margin-top: 5px;
+    background: rgba(255, 0, 0, 0.5);
+    border-radius: 3px;
+    padding: 0 5px;
+}
+
+.register-warn-div p{
+    font-size: 0.8em;
+}
+
+.make-rate-link {
+    color: white;
+    margin-top: 10px;
+    background: #94bfeb;
+    border: 1px solid white;
+    transition: all 0.2s linear;
+    border-radius: 4px;
+    text-decoration: none;
+    padding: 3px;
+    width: 250px;
+    display: flex;
+    justify-content: center;
+}
+
+.add-result-link {
+    color: white;
+    background: #94bfeb;
+    border: 1px solid white;
+    transition: all 0.2s linear;
+    border-radius: 4px;
+    text-decoration: none;
+    padding: 3px;
+    width: 250px;
+    display: flex;
+    justify-content: center;
+}
+
+.make-rate-link:hover {
+    background: #94bfeb;
+}
+
+.event-secondary {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.members-div ul {
+    list-style-type: square;
+}
+
+.event-result {
+    margin: 0px;
+}
+
+.event-result p {
+    margin: 0px;
+}
+
