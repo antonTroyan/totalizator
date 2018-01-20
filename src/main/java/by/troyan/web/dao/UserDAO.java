@@ -15,7 +15,7 @@ import java.util.List;
 public interface UserDAO {
     List<User> getAllUsers() throws DAOException;
 
-    User createUser(User user) throws DAOException, UserException;
+    User createUser(User user) throws DAOException;
 
     User getUserByLogin(String login) throws DAOException;
 
@@ -42,4 +42,8 @@ public interface UserDAO {
     void removeDebtorMark(int userId) throws DAOException;
 
     boolean checkIsDebtor (int userId) throws DAOException;
+
+    boolean checkIsLoginFree (String login) throws DAOException;
+
+    boolean checkIsEmailFree (String email) throws DAOException;
 }

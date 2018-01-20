@@ -36,7 +36,6 @@ public class LoginCommand implements ICommand {
                 session.setAttribute("username", login);
                 session.setAttribute("role", user.getRole().getValue());
             }
-
         } catch (ServiceException exc){
             LOG.error(exc);
         } catch (UserException exc){

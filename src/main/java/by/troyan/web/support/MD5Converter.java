@@ -26,10 +26,10 @@ public class MD5Converter {
             LOG.error(exc);
         }
         BigInteger bigInt = new BigInteger(1, digest);
-        String md5Hex = bigInt.toString(16);
-        while( md5Hex.length() < 32 ){
-            md5Hex = "0" + md5Hex;
+        String result = bigInt.toString(16);
+        while( result.length() < 32 ){
+            result = "0" + result;
         }
-        return md5Hex;
+        return result;
     }
 }

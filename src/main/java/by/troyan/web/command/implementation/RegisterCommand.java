@@ -34,11 +34,11 @@ public class RegisterCommand implements ICommand {
         try {
             user = userService.registerUser(login, password, confirmPassword, email);
         } catch (ServiceException exc){
-            LOG.error(exc);
             throw new CommandException(exc);
         } catch (UserException exc){
             req.setAttribute("error", MessageLocalizer.getLocalizedForCurrentLocaleMessage(exc.getMessage(), req));
             req.setAttribute("user", exc.getUser());
+            LOG.error(exc);
             CommandFactory.getFactory().createCommand(CommandEnum.SHOW_REGISTRATION_PAGE).execute(req, resp);
         }
         req.setAttribute("success", MessageLocalizer.getLocalizedForCurrentLocaleMessage("success.register", req));

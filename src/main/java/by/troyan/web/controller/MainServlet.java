@@ -42,11 +42,8 @@ public class MainServlet extends HttpServlet {
             req.setAttribute("message", exc.getMessage());
             req.getRequestDispatcher("error_page.jsp").forward(req, resp);
         } catch (Exception exc){
-
-            exc.printStackTrace();
-
             LOG.error(exc);
-            req.setAttribute("message", MessageLocalizer.getLocalizedForCurrentLocaleMessage("err.smth-error", req));
+            req.setAttribute("message", MessageLocalizer.getLocalizedForCurrentLocaleMessage(exc.getMessage(), req));
             req.getRequestDispatcher("error_page.jsp").forward(req, resp);
         }
     }

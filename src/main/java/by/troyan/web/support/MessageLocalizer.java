@@ -12,9 +12,19 @@ public class MessageLocalizer {
     private final static String LOCALE_BUNDLE_NAME = "locale_";
 
     public static String getLocalizedForCurrentLocaleMessage(String msgName, HttpServletRequest req){
+        String pureMessage = getPureMessageFromException(msgName);
         ResourceBundle bundle = ResourceBundle.getBundle(
                 LOCALE_BUNDLE_NAME.concat((String)req.getSession().getAttribute("locale")));
-        return bundle.getString(msgName);
+
+        return bundle.getString(pureMessage);
+    }
+
+    private static String getPureMessageFromException (String exceptionMessage){
+        String result;
+        String[] splitedArray = exceptionMessage.split(":");
+        result = splitedArray[1].trim();
+
+        return result;
     }
 
     public static String getLocalizedForCurrentLocaleMessage(List<String> msgNameList, HttpServletRequest req){

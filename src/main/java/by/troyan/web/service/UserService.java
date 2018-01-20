@@ -29,4 +29,5 @@ public interface UserService {
     void deleteUsers(List<Integer> idList) throws ServiceException;
 
     boolean checkIsDebtor(String login) throws  ServiceException;
+
 }

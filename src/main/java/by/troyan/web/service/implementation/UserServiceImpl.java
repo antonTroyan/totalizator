@@ -33,26 +33,50 @@ public class UserServiceImpl implements UserService {
         rateDAO = DAOFactory.getFactory().getRateDAO();
     }
 
-    @Override
-    public User registerUser(String login, String password, String confirmPassword, String email)
-            throws ServiceException, UserException {
-        User user = new User();
-        if((email == null) || (email.isEmpty()))
+    private boolean checkEmail(String email) throws ServiceException, DAOException {
+        boolean  isValid = false;
+        if ((email == null) || (email.isEmpty()))
             throw new ServiceException("email is empty or null");
-        user.setEmail(email);
-        if((login == null) || (login.isEmpty())){
+        if (userDAO.checkIsEmailFree(email)) {
+            isValid = true;
+        } else {
+            throw new ServiceException("err.this-email-is-busy");
+        }
+        return isValid;
+    }
+
+    private boolean checkLogin(String login) throws ServiceException, DAOException{
+        boolean  isValid = false;
+        if ((login == null) || (login.isEmpty())) {
             throw new ServiceException("login is empty or null");
         }
-        user.setLogin(login);
-        if((password == null) || (password.isEmpty()) || (confirmPassword == null)
-                || (confirmPassword.isEmpty()) || (!password.equals(confirmPassword))){
-            throw new ServiceException("password or password confirmation is invalid");
+        if (userDAO.checkIsLoginFree(login)){
+            isValid = true;
+        } else {
+            throw new ServiceException("err.this-login-is-busy");
         }
-        user.setPassHash(MD5Converter.getHash(password));
+        return isValid;
+    }
+
+    @Override
+    public User registerUser(String login, String password, String confirmPassword, String email)
+            throws ServiceException {
+        User user = new User();
         try {
+            if(checkEmail(email)){
+                user.setEmail(email);
+            }
+            if(checkLogin(login)){
+                user.setLogin(login);
+            }
+            if ((password == null) || (password.isEmpty()) || (confirmPassword == null)
+                    || (confirmPassword.isEmpty()) || (!password.equals(confirmPassword))) {
+                throw new ServiceException("password or password confirmation is invalid");
+            }
+            user.setPassHash(MD5Converter.getHash(password));
+
             user = userDAO.createUser(user);
-        }
-        catch (DAOException exc){
+        } catch (DAOException exc) {
             LOG.error(exc);
             throw new ServiceException(exc);
         }

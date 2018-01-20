@@ -62,7 +62,10 @@ public class UserDAOImpl implements UserDAO {
     private static final String SQL_FOR_CHECK_IS_DEBTOR = "SELECT `is_debtor`" +
             "FROM `user` " +
             "WHERE `user_id` = ?;";
-
+    private static final String SQL_FOR_CHECK_IS_LOGIN_FREE = "SELECT `login` FROM `user` " +
+            "WHERE `login` = ?;";
+    private static final String SQL_FOR_CHECK_IS_EMAIL_FREE = "SELECT `email` FROM `user` " +
+            "WHERE `email` = ?;";
 
     private UserDAOImpl() {}
 
@@ -116,13 +119,11 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User createUser(User user) throws DAOException, UserException {
+    public User createUser(User user) throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;
         try{
             connection = pool.getConnection();
-            connection.setAutoCommit(false);
-            Savepoint savepoint = connection.setSavepoint();
             try {
                 statement = connection.prepareStatement(SQL_FOR_CREATE_USER);
                 statement.setString(1, user.getLogin());
@@ -130,16 +131,11 @@ public class UserDAOImpl implements UserDAO {
                 statement.setString(3, user.getEmail());
                 statement.executeUpdate();
             } catch (SQLException exc) {
-                connection.rollback(savepoint);
                 LOG.error(exc);
-                if (exc.getErrorCode() == 1062) {
-                    throw new UserException("err.user-exists", user);
-                } else {
-                    throw new DAOException(exc);
-                }
+                throw new DAOException(exc);
             } finally {
                 connection.setAutoCommit(true);
-                if(statement != null){
+                if (statement != null) {
                     statement.close();
                 }
             }
@@ -624,5 +620,77 @@ public class UserDAOImpl implements UserDAO {
             }
         }
         return isDebtor;
+    }
+
+    @Override
+    public boolean checkIsLoginFree(String login) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        boolean isLoginFree = false;
+
+        try{
+            connection = pool.getConnection();
+            try {
+                statement = connection.prepareStatement(SQL_FOR_CHECK_IS_LOGIN_FREE);
+                statement.setString(1, login);
+                resultSet = statement.executeQuery();
+
+                if (!resultSet.next()) {
+                    isLoginFree = true;
+                }
+            } catch (SQLException exc) {
+                LOG.error(exc);
+                throw new DAOException(exc);
+            } finally {
+                if(statement != null){
+                    statement.close();
+                }
+            }
+        } catch (SQLException exc){
+            LOG.error(exc);
+            throw new DAOException(exc);
+        } finally {
+            if(connection != null){
+                pool.returnConnectionToPool(connection);
+            }
+        }
+        return isLoginFree;
+    }
+
+    @Override
+    public boolean checkIsEmailFree(String email) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        boolean isEmailFree = false;
+
+        try{
+            connection = pool.getConnection();
+            try {
+                statement = connection.prepareStatement(SQL_FOR_CHECK_IS_EMAIL_FREE);
+                statement.setString(1, email);
+                resultSet = statement.executeQuery();
+                if (!resultSet.next()) {
+                    isEmailFree = true;
+                }
+            } catch (SQLException exc) {
+                LOG.error(exc);
+                throw new DAOException(exc);
+            } finally {
+                if(statement != null){
+                    statement.close();
+                }
+            }
+        } catch (SQLException exc){
+            LOG.error(exc);
+            throw new DAOException(exc);
+        } finally {
+            if(connection != null){
+                pool.returnConnectionToPool(connection);
+            }
+        }
+
+        return isEmailFree;
     }
 }
