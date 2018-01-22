@@ -18,6 +18,18 @@ import java.io.IOException;
  */
 
 public interface ICommand {
+
+    /**
+     * Default method, check access rights. Need enum and request.
+     * Gets attribute from the request, if something is wrong it throws exception.
+     *
+     * @param  req, needLevels
+     *        1 param. Request from user to some command
+     *        2 param. Array consists all user roles that allowed to have access to this command
+     *
+     * @return  CommandEnum Object was founded by a value
+     *
+     */
     default void checkRoots(HttpServletRequest req, User.Role[] needLevels)
             throws  UnauthorizedException {
         if((needLevels == null) || (needLevels.length == 0)  ){

@@ -8,7 +8,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
 /**
- * TagHandler. Just to demonstrate works with own tag. Print some info
+ * TagHandler. Just to demonstrate works with own tag. method doStartTag() print some info
  */
 
 

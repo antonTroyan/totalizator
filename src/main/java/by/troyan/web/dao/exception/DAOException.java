@@ -1,8 +1,7 @@
 package by.troyan.web.dao.exception;
 
 /**
- * Main DAO exceptions.
- * @author  Anton Troyan
+ * Main DAO exceptions. Throws in dao implementation classes when meet dao problems
  */
 
 public class DAOException extends Exception {

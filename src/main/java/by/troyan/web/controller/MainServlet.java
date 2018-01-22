@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Main controller servlet. It receives command from attribute, creates it like object and
- * command to run it.
+ * Main controller servlet. Using method processRequest(HttpServletRequest req, HttpServletResponse resp)
+ * it receives command from attribute, creates it like object and command to run it.
  */
 
 public class MainServlet extends HttpServlet {
@@ -28,11 +28,17 @@ public class MainServlet extends HttpServlet {
         processRequest(req, resp);
     }
 
+    /**
+     * Used to run command. Receives attribute command, use method getEnum(commandName) to receive
+     * command Object, then start it using method execute(req, resp).
+     *
+     * @param  req, resp
+     *        1 req. Request from user to some command
+     *        2 resp. Response to user or another command
+     */
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ICommand command;
         String commandName = req.getParameter("command");
-
-
         try {
             CommandEnum commandEnum = CommandEnum.getEnum(commandName);
             command = commandFactory.createCommand(commandEnum);

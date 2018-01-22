@@ -1,7 +1,9 @@
 package by.troyan.web.command.exception;
 
 /**
- * Contains commands exceptions.
+ * Contains commands exceptions. This exception throws
+ * in commands when it could not be executed in a different
+ * reasons.
  */
 
 public class CommandException extends Exception {

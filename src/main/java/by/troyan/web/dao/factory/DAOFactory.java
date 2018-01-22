@@ -4,7 +4,8 @@ import by.troyan.web.dao.*;
 import by.troyan.web.dao.implementation.*;
 
 /**
- * DAO fabric singleton.
+ * DAO fabric singleton. Used to create instances of DAO implementations
+ *
  */
 
 public class DAOFactory {

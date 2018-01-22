@@ -2,10 +2,13 @@ package by.troyan.web.command;
 
 
 /**
- * All commands enum. Used in CommandFactory.
- * Contains methods to receive objects by keys in form of String
+ * Class converter.
+ * This class have Enum with all possible commands, the values of this Enum
+ * are key words that come from jsp as commands.
+ * Using method getEnum(String value) class finds key and return special Enum-command
+ * that will be used by MainServlet.class.
+ *
  */
-
 
 public enum CommandEnum {
 
@@ -64,6 +67,17 @@ public enum CommandEnum {
         return value;
     }
 
+
+    /**
+     * Finds and return CommandEnum Object founded by the value-key. Used to convert
+     * strings from jsp to commands that could be interpreted by MainServlet.class.
+     *
+     * @param  value
+     *         One of the Strings from existing CommandEnum value field
+     *
+     * @return  CommandEnum Object was founded by a value
+     *
+     */
     public static CommandEnum getEnum(String value) throws IllegalArgumentException{
         for(CommandEnum commandEnum : values()){
             if(commandEnum.value.equals(value)){

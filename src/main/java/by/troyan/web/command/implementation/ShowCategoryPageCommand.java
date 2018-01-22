@@ -20,7 +20,8 @@ import java.io.IOException;
 public class ShowCategoryPageCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(ShowCategoryPageCommand.class);
 
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, CommandException, UnauthorizedException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException,
+            CommandException, UnauthorizedException {
         CommandFactory.getFactory().createCommand(CommandEnum.ADD_CATEGORIES_TO_REQUEST).execute(req, resp);
         EventService eventService = ServiceFactory.getInstance().getEventService();
         int page;

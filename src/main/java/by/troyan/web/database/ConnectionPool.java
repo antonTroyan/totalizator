@@ -12,7 +12,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * ConnectionPool. Contains list of connections and maintain it.
- * Several methods allow to receive connection  form list, use it and return back.
+ * Several methods allow to receive connection from list, use it and return back.
+ * All connections are organised in ArrayBlockingQueue.
  */
 
 public class ConnectionPool {
@@ -27,6 +28,14 @@ public class ConnectionPool {
         return connectionPool;
     }
 
+
+    /**
+     * Constructor. Used to initialise pool of connections.
+     *
+     * @param  properties
+     *         need properties that have string poolSize with the value of
+     *         needed connections for pool
+     */
     private ConnectionPool(Properties properties){
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -52,6 +61,14 @@ public class ConnectionPool {
         }
     }
 
+
+    /**
+     * Used to receive connection from connection pool. If there is no free connections,
+     * query should wait.
+     *
+     * @return Connection
+     *
+     */
     public Connection getConnection(){
         Connection connection;
         try {
@@ -64,18 +81,31 @@ public class ConnectionPool {
         return connection;
     }
 
-    public void returnConnectionToPool(Connection c){
+
+    /**
+     * Used to return connection to the pool.
+     *
+     * @param  connection
+     *         connection that should be returned
+     *
+     */
+    public void returnConnectionToPool(Connection connection){
         lockForReturnConnection.lock();
-        if(!connections.contains(c)) {
-            connections.offer(c);
+        if(!connections.contains(connection)) {
+            connections.offer(connection);
         }
         lockForReturnConnection.unlock();
     }
 
+    /**
+     * In case of wrong closing before calling returnConnectionToPool(Connection connection)
+     * method. When the GC will find unused object of this class it calls this method
+     * to close connections before destroying the object
+     */
     @Override
     protected void finalize() throws Throwable {
-        for(Connection c : connections){
-            c.close();
+        for(Connection connection : connections){
+            connection.close();
         }
     }
 }

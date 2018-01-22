@@ -9,6 +9,8 @@ import java.util.Map;
 
 /**
  * Command fabric, singleton. <p>
+ * This class used to create object of particular command by a String
+ * using createCommand(CommandEnum command) metod. <p>
  * Contains command map with keys - enums and values - objects.
  * Have one method to receive command from the factory.
  */
@@ -64,6 +66,15 @@ public class CommandFactory {
         commands.put(CommandEnum.SET_COEFFICIENT, new SetCoefficientCommand());
     }
 
+
+    /**
+     * Returns an Object of command if this map contains a mapping for the specified
+     * key.
+     *
+     * @param command used as a key to find necessary Object to create.
+     * @return Object of command if this map contains a mapping for the CommandEnum
+     *         key.
+     */
     public ICommand createCommand(CommandEnum command){
         if(commands.containsKey(command)){
             return commands.get(command);
