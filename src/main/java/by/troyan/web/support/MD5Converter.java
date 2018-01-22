@@ -8,12 +8,19 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * MD5Converter class. Help to work passHash for Users.
+ * MD5Converter class. Help to set passHash for Users.
  */
 
 public class MD5Converter {
     private final static Logger LOG = LogManager.getLogger(MD5Converter.class);
 
+    /**
+     * Using special algorithm calculate special code
+     *
+     * @param  string
+     *        all strings, usually used for passwords
+     * @return string of code
+     */
     public static String getHash(String string){
         MessageDigest messageDigest = null;
         byte[] digest = new byte[0];

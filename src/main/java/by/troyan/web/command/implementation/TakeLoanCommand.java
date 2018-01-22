@@ -35,8 +35,8 @@ public class TakeLoanCommand implements ICommand {
 
         try {
         username = (String)req.getSession().getAttribute("username");
-        paySystemService.fillUpBalance(username, enterpriseCardNumber, enterpriseCardValidityDate,
-                enterpriseCardCode, standardCreditAmount);
+        paySystemService.fillUpBalance(username, ENTERPRISE_CARD_NUMBER, ENTERPRISE_CARD_VALIDITY_DATE,
+                ENTERPRISE_CARD_CODE, STANDARD_CREDIT_AMOUNT);
         paySystemService.takeLoan((String)req.getSession().getAttribute("username"));
 
         }  catch(ServiceException exc){

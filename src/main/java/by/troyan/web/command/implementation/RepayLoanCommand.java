@@ -34,7 +34,7 @@ public class RepayLoanCommand implements ICommand {
 
         try {
            username = (String)req.getSession().getAttribute("username");
-           paySystemService.withdrawMoney(username, enterpriseCardNumber, enterpriseCardValidityDate, standardCreditAmount);
+           paySystemService.withdrawMoney(username, ENTERPRISE_CARD_NUMBER, ENTERPRISE_CARD_VALIDITY_DATE, STANDARD_CREDIT_AMOUNT);
            paySystemService.repayLoan(username);
 
         }  catch(ServiceException exc){

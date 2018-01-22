@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * PaginationObject class. Help to show necessary amount of info on page.
+ *
  */
 
 public class PaginationObject<T> {

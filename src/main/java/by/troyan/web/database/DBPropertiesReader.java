@@ -4,10 +4,16 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
- * DBPropertiesReader. Class that reads info for database initialization from file.
+ * DBPropertiesReader. Class that reads info for database initialization from file
+ * using static method getDBProperties().
  */
 
 public class DBPropertiesReader {
+
+    /**
+     * Used to receive information from properties file
+     * @return Properties object
+     */
     public static Properties getDBProperties(){
         Properties result = new Properties();
         ResourceBundle resource = ResourceBundle.getBundle("db");
