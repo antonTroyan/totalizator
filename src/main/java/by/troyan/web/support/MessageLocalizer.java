@@ -3,6 +3,7 @@ package by.troyan.web.support;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 /**
  * MessageLocalizer class. Used to provide to users information about exceptions
@@ -38,10 +39,19 @@ public class MessageLocalizer {
      * @return string without excess information
      */
     private static String getPureMessageFromException (String exceptionMessage){
-        String result;
-        String[] splittedArray = exceptionMessage.split(":");
-        result = splittedArray[1].trim();
+        String result = exceptionMessage;
 
+        System.out.println(exceptionMessage + " exc message");
+
+        Scanner scanner = new Scanner(exceptionMessage);
+        if(scanner.findInLine(":") != null){
+            String[] splittedArray = exceptionMessage.split(":");
+            result = splittedArray[1].trim();
+
+            System.out.println("in scanner");
+        }
+
+        System.out.println(result + " final result");
         return result;
     }
 

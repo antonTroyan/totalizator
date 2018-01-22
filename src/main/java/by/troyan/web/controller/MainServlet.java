@@ -39,6 +39,7 @@ public class MainServlet extends HttpServlet {
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ICommand command;
         String commandName = req.getParameter("command");
+
         try {
             CommandEnum commandEnum = CommandEnum.getEnum(commandName);
             command = commandFactory.createCommand(commandEnum);

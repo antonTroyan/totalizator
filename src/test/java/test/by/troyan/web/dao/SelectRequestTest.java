@@ -12,10 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
-
 public class SelectRequestTest {
-    private final static Logger LOG = LogManager.getLogger("SelectRequestTest");
+    private final static Logger LOG = LogManager.getLogger(SelectRequestTest.class);
 
     @Test
     public void selectRequest(){
@@ -24,7 +22,7 @@ public class SelectRequestTest {
         Connection c = pool.getConnection();
         try {
             Statement statement = c.createStatement();
-            statement.execute("SELECT * FROM `event`");
+            statement.execute("SELECT `event_name` FROM `event`");
             resultSet = statement.getResultSet();
             while(resultSet.next()){
                 LOG.info(resultSet.getString("event_name"));

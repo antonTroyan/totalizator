@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
             }
             if ((password == null) || (password.isEmpty()) || (confirmPassword == null)
                     || (confirmPassword.isEmpty()) || (!password.equals(confirmPassword))) {
-                throw new ServiceException("password or password confirmation is invalid");
+                throw new ServiceException("err.password-or-password-confirmation-is-invalid");
             }
             user.setPassHash(MD5Converter.getHash(password));
 
