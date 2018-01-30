@@ -21,7 +21,8 @@ public class OperationDAOImpl implements OperationDAO {
     private final static Logger LOG = LogManager.getLogger(OperationDAOImpl.class);
     public static final String INPUT = "INPUT";
     public static final String OUTPUT = "OUTPUT";
-    private static final String SQL_FOR_ADD_OPERATION = "INSERT INTO `moneyoperation`(`user_id`, `operation_type`, `amount`, `card_number`, `validity_date`) " +
+    private static final String SQL_FOR_ADD_OPERATION = "INSERT INTO `moneyoperation`(`user_id`, `operation_type`," +
+            " `amount`, `card_number`, `validity_date`) " +
             "VALUES(?, ?, ?, ?, ?);";
 
 

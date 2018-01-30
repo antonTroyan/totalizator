@@ -35,7 +35,8 @@ public class PaySystemServiceImpl implements PaySystemService {
     }
 
     @Override
-    public Operation fillUpBalance(String username, String cardNumber, String validityDate, String cardCode, String amount) throws ServiceException, OperationException {
+    public Operation fillUpBalance(String username, String cardNumber, String validityDate, String cardCode, String amount)
+            throws ServiceException, OperationException {
         Operation operation = new Operation();
         OperationException operationException = new OperationException(operation);
         if((cardNumber == null) || (cardNumber.isEmpty()) || (cardNumber.length() != 16)){

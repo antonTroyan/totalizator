@@ -46,15 +46,16 @@ public class EventDAOImpl implements EventDAO {
             "ON `event`.`league_id` = `league`.`league_id` " +
             "WHERE `event_status` = 'FINISHED' " +
             "OR `event_start_date` < now();";
-    private static final String SQL_GOR_GET_ALL_NOT_ENDED_EVENTS = "SELECT `event`.`event_id` AS `id`, `event_name`, `league_name`, " +
-            "`event_status`, `event_start_date` AS `date` " +
+    private static final String SQL_GOR_GET_ALL_NOT_ENDED_EVENTS = "SELECT `event`.`event_id` AS `id`, `event_name`, " +
+            "`league_name`, `event_status`, `event_start_date` AS `date` " +
             "FROM `event` " +
             "LEFT JOIN `league` " +
             "ON `event`.`league_id` = `league`.`league_id` " +
             "WHERE `event_status` = 'POSTED' " +
             "AND `event_start_date` > now();";
-    private static final String SQL_FOR_GET_EVENT_BY_ID = "SELECT `event_id` AS `id`, `event_name`, `rate_types`, `event_status`, " +
-            "`coefficient`, `live_translation_reference` AS `link`, `event_start_date` AS `date`, `league_name` " +
+    private static final String SQL_FOR_GET_EVENT_BY_ID = "SELECT `event_id` AS `id`, `event_name`, `rate_types`, " +
+            "`event_status`,`coefficient`, `live_translation_reference` AS `link`, `event_start_date` AS `date`, " +
+            "`league_name` " +
             "FROM `event` " +
             "LEFT JOIN `league` " +
             "ON `event`.`league_id` = `league`.`league_id` " +

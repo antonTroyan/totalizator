@@ -16,6 +16,7 @@ public class ChangeLocaleCommand implements ICommand {
     public void execute(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException, CommandException, UnauthorizedException {
         req.getSession().setAttribute("locale", req.getParameter("locale"));
+
         CommandFactory.getFactory().createCommand(CommandEnum.SHOW_MAIN_PAGE).execute(req, resp);
     }
 }
