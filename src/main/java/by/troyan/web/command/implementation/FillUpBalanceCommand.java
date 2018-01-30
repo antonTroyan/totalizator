@@ -11,9 +11,11 @@ import by.troyan.web.service.PaySystemService;
 import by.troyan.web.service.exception.ServiceException;
 import by.troyan.web.service.factory.ServiceFactory;
 import by.troyan.web.support.MessageLocalizer;
+import org.apache.catalina.Session;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,6 +46,6 @@ public class FillUpBalanceCommand implements ICommand {
             CommandFactory.getFactory().createCommand(CommandEnum.SHOW_FILL_UP_BALANCE_PAGE).execute(req, resp);
         }
         req.setAttribute("success", MessageLocalizer.getLocalizedForCurrentLocaleMessage("success.fill-up", req));
-        CommandFactory.getFactory().createCommand(CommandEnum.SHOW_FILL_UP_BALANCE_PAGE).execute(req, resp);
+        resp.sendRedirect("main?command=showFillUpBalancePage");
     }
 }

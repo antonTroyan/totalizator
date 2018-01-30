@@ -57,7 +57,6 @@ public class TakeLoanCommand implements ICommand {
             req.setAttribute("operation", exc.getOperation());
             CommandFactory.getFactory().createCommand(CommandEnum.SHOW_FILL_UP_BALANCE_PAGE).execute(req, resp);
         }
-
-        CommandFactory.getFactory().createCommand(CommandEnum.SHOW_PERSONAL_PAGE).execute(req, resp);
+        resp.sendRedirect("main?command=showPersonalPage");
     }
 }
