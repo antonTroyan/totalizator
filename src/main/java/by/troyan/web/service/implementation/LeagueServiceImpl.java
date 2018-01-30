@@ -18,11 +18,11 @@ import java.util.List;
 
 public class LeagueServiceImpl implements LeagueService {
     private final static Logger LOG = LogManager.getLogger(LeagueServiceImpl.class);
-    private static final LeagueServiceImpl instance = new LeagueServiceImpl();
+    private static final LeagueServiceImpl INSTANCE = new LeagueServiceImpl();
     private LeagueDAO leagueDAO;
 
     public static LeagueServiceImpl getInstance(){
-        return instance;
+        return INSTANCE;
     }
 
     private LeagueServiceImpl(){

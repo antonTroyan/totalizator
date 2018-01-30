@@ -58,13 +58,13 @@ public class RateDAOImpl implements RateDAO {
                 "VALUES(?, ?, ?, ?, ?, ?, ?, ?);");
     }
 
-    private static final RateDAOImpl instance = new RateDAOImpl();
-    private static final ConnectionPool pool = ConnectionPool.getConnectionPool();
+    private static final RateDAOImpl INSTANCE = new RateDAOImpl();
+    private static final ConnectionPool CONNECTION_POOL = ConnectionPool.getConnectionPool();
 
     private RateDAOImpl(){}
 
     public static RateDAOImpl getInstance(){
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -74,7 +74,7 @@ public class RateDAOImpl implements RateDAO {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try{
                 statement = connection.prepareStatement(SQL_FOR_GET_ACTIVE_RATES_FOR_USER);
                 statement.setInt(1, userId);
@@ -111,7 +111,7 @@ public class RateDAOImpl implements RateDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return result;
@@ -124,7 +124,7 @@ public class RateDAOImpl implements RateDAO {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try{
                 statement = connection.prepareStatement(SQL_FOR_GET_FINISHED_RATES_FOR_USER);
                 statement.setInt(1, userId);
@@ -162,7 +162,7 @@ public class RateDAOImpl implements RateDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return result;
@@ -173,7 +173,7 @@ public class RateDAOImpl implements RateDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             connection.setAutoCommit(false);
             Savepoint savepoint = connection.setSavepoint();
             try {
@@ -207,7 +207,7 @@ public class RateDAOImpl implements RateDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return rate;
@@ -220,7 +220,7 @@ public class RateDAOImpl implements RateDAO {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try{
                 statement = connection.prepareStatement(SQL_FOR_GET_FULL_MONEY_AMOUNT_FOR_EVENT);
                 statement.setInt(1, eventId);
@@ -251,7 +251,7 @@ public class RateDAOImpl implements RateDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return result;
@@ -264,7 +264,7 @@ public class RateDAOImpl implements RateDAO {
         ResultSet resultSet = null;
         List<Rate> result = new ArrayList<>();
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try{
                 statement = connection.prepareStatement(SQL_FOR_GET_RATES_FOR_EVENT);
                 statement.setInt(1, eventId);
@@ -305,7 +305,7 @@ public class RateDAOImpl implements RateDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return result;
@@ -316,7 +316,7 @@ public class RateDAOImpl implements RateDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             connection.setAutoCommit(false);
             Savepoint savepoint = connection.setSavepoint();
             try {
@@ -339,7 +339,7 @@ public class RateDAOImpl implements RateDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
     }

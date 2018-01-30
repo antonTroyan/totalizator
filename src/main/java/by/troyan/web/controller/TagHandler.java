@@ -14,7 +14,6 @@ import java.io.IOException;
 
 public class TagHandler extends TagSupport {
     private final static Logger LOG = LogManager.getLogger(TagSupport.class);
-    private static final long serialVersionUID = 1L;
 
     @Override
     public int doStartTag() throws JspException {

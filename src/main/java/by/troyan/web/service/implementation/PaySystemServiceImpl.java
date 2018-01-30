@@ -20,13 +20,13 @@ import java.math.BigDecimal;
 
 public class PaySystemServiceImpl implements PaySystemService {
     private final static Logger LOG = LogManager.getLogger(PaySystemServiceImpl.class);
-    private static final PaySystemServiceImpl instance = new PaySystemServiceImpl();
+    private static final PaySystemServiceImpl INSTANCE = new PaySystemServiceImpl();
 
     private OperationDAO operationDAO;
     private UserDAO userDAO;
 
     public static PaySystemServiceImpl getInstance(){
-        return instance;
+        return INSTANCE;
     }
 
     private PaySystemServiceImpl(){

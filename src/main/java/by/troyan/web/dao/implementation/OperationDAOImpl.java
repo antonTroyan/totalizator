@@ -4,7 +4,6 @@ import by.troyan.web.dao.OperationDAO;
 import by.troyan.web.dao.exception.DAOException;
 import by.troyan.web.database.ConnectionPool;
 import by.troyan.web.entity.Operation;
-import by.troyan.web.exception.OperationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,13 +25,13 @@ public class OperationDAOImpl implements OperationDAO {
             "VALUES(?, ?, ?, ?, ?);";
 
 
-    private static final OperationDAOImpl instance = new OperationDAOImpl();
-    private final ConnectionPool pool = ConnectionPool.getConnectionPool();
+    private static final OperationDAOImpl INSTANCE = new OperationDAOImpl();
+    private static final ConnectionPool CONNECTION_POOL = ConnectionPool.getConnectionPool();
 
     private OperationDAOImpl(){}
 
     public static OperationDAOImpl getInstance(){
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -40,7 +39,7 @@ public class OperationDAOImpl implements OperationDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             connection.setAutoCommit(false);
             Savepoint savepoint = connection.setSavepoint();
             try {
@@ -66,7 +65,7 @@ public class OperationDAOImpl implements OperationDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return operation;

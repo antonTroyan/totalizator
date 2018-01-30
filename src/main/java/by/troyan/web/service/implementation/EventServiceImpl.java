@@ -26,14 +26,14 @@ import java.util.List;
 
 public class EventServiceImpl implements EventService {
     private final static Logger LOG = LogManager.getLogger(EventServiceImpl.class);
-    private static final EventServiceImpl instance = new EventServiceImpl();
+    private static final EventServiceImpl INSTANCE = new EventServiceImpl();
 
     private EventDAO eventDAO;
     private MemberDAO memberDAO;
     private EventResultDAO eventResultDAO;
 
     public static EventServiceImpl getInstance(){
-        return instance;
+        return INSTANCE;
     }
 
     private EventServiceImpl(){

@@ -21,13 +21,13 @@ import java.io.IOException;
 
 public class AddMemberCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(AddMemberCommand.class);
-    private final MemberService memberService = ServiceFactory.getInstance().getMemberService();
+    private final MemberService MEMBER_SERVICE = ServiceFactory.getInstance().getMemberService();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, CommandException, UnauthorizedException {
         checkRoots(req, new User.Role[]{User.Role.ADMINISTRATOR});
         try {
-            memberService.addMember(req.getParameter("name"),
+            MEMBER_SERVICE.addMember(req.getParameter("name"),
                     req.getParameter("category-id"), req.getParameter("league-id"));
         }
         catch(ServiceException exc){

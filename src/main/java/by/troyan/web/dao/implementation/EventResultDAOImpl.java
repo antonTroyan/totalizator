@@ -27,15 +27,13 @@ public class EventResultDAOImpl implements EventResultDAO {
             "`winner_score`, `loser_id`, `loser_score`) " +
             "VALUES(?, ?, ?, ?, ?)";
 
-
-
-    private static final EventResultDAOImpl instance = new EventResultDAOImpl();
-    private static final ConnectionPool pool = ConnectionPool.getConnectionPool();
+    private static final EventResultDAOImpl INSTANCE = new EventResultDAOImpl();
+    private static final ConnectionPool CONNECTION_POOL = ConnectionPool.getConnectionPool();
 
     private EventResultDAOImpl(){}
 
     public static EventResultDAOImpl getInstance(){
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -43,7 +41,7 @@ public class EventResultDAOImpl implements EventResultDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try {
                 statement = connection.prepareStatement(SQL_FOR_ADD_EVENT_RESULT);
                 statement.setInt(1, eventResult.getEventId());
@@ -65,7 +63,7 @@ public class EventResultDAOImpl implements EventResultDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return eventResult;
@@ -78,7 +76,7 @@ public class EventResultDAOImpl implements EventResultDAO {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try{
                 statement = connection.prepareStatement(SQL_FOR_GET_EVENT_RESULT_BY_EVENT);
                 statement.setInt(1, eventId);
@@ -114,7 +112,7 @@ public class EventResultDAOImpl implements EventResultDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return eventResult;

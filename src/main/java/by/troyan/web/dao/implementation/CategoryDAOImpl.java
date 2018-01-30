@@ -20,13 +20,13 @@ public class CategoryDAOImpl implements CategoryDAO {
     private static final String SQL_FOR_ADD_CATEGORY = "INSERT INTO `eventcategory` (`category_name`) VALUES (?);";
     private static final String SQL_FOR_GET_ALL_CATEGORIES = "SELECT * FROM `eventcategory`";
 
-    private static final CategoryDAOImpl instance = new CategoryDAOImpl();
-    private final ConnectionPool pool = ConnectionPool.getConnectionPool();
+    private static final CategoryDAOImpl INSTANCE = new CategoryDAOImpl();
+    private static final ConnectionPool CONNECTION_POOL = ConnectionPool.getConnectionPool();
 
     private CategoryDAOImpl() {}
 
     public static CategoryDAOImpl getInstance(){
-        return instance;
+        return INSTANCE;
     }
 
     public List<Category> getAllCategories() throws DAOException {
@@ -35,7 +35,7 @@ public class CategoryDAOImpl implements CategoryDAO {
         ResultSet resultSet = null;
         List<Category> result = new ArrayList<>();
         try {
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try {
                 statement = connection.createStatement();
                 statement.execute(SQL_FOR_GET_ALL_CATEGORIES);
@@ -64,7 +64,7 @@ public class CategoryDAOImpl implements CategoryDAO {
             LOG.error(exc);
             throw new DAOException(exc.getMessage());
         } finally {
-            pool.returnConnectionToPool(connection);
+            CONNECTION_POOL.returnConnectionToPool(connection);
         }
         return result;
     }
@@ -81,7 +81,7 @@ public class CategoryDAOImpl implements CategoryDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try {
                 statement = connection.prepareStatement(SQL_FOR_ADD_CATEGORY);
                 statement.setString(1, category.getName());
@@ -99,7 +99,7 @@ public class CategoryDAOImpl implements CategoryDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return category;

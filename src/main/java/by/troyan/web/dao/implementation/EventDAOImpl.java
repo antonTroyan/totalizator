@@ -67,13 +67,13 @@ public class EventDAOImpl implements EventDAO {
     private static final  String SQL_FOR_SET_COEFFICIENT = "UPDATE `event` SET `coefficient`= ? WHERE `event_id`= ?";
 
     private final static Logger LOG = LogManager.getLogger("EventDAOImpl");
-    private static final EventDAOImpl instance = new EventDAOImpl();
-    private static final ConnectionPool pool = ConnectionPool.getConnectionPool();
+    private static final EventDAOImpl INSTANCE = new EventDAOImpl();
+    private static final ConnectionPool CONNECTION_POOL = ConnectionPool.getConnectionPool();
 
     private EventDAOImpl(){}
 
     public static EventDAOImpl getInstance(){
-        return instance;
+        return INSTANCE;
     }
 
     private List<Event> getEventsBySql(String sql, Object... params) throws DAOException {
@@ -83,7 +83,7 @@ public class EventDAOImpl implements EventDAO {
         List<Event> result = new ArrayList<>();
 
         try {
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try {
                 statement = connection.prepareStatement(sql);
                 insertParamsIntoPreparedStatement(statement, params);
@@ -120,7 +120,7 @@ public class EventDAOImpl implements EventDAO {
             LOG.error(exc);
             throw new DAOException(exc.getMessage());
         } finally {
-            pool.returnConnectionToPool(connection);
+            CONNECTION_POOL.returnConnectionToPool(connection);
         }
         return result;
     }
@@ -163,7 +163,7 @@ public class EventDAOImpl implements EventDAO {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try{
                 statement = connection.prepareStatement(SQL_FOR_GET_EVENT_BY_ID);
                 statement.setInt(1, eventId);
@@ -202,7 +202,7 @@ public class EventDAOImpl implements EventDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return event;
@@ -214,7 +214,7 @@ public class EventDAOImpl implements EventDAO {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try {
                 statement = connection.prepareStatement(SQL_FOR_ADD_EVENT, Statement.RETURN_GENERATED_KEYS);
                 statement.setString(1, event.getEventName());
@@ -248,7 +248,7 @@ public class EventDAOImpl implements EventDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return event;
@@ -259,7 +259,7 @@ public class EventDAOImpl implements EventDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try {
                 statement = connection.prepareStatement(SQL_FOR_FINISH_EVENT);
                 statement.setInt(1, eventId);
@@ -277,7 +277,7 @@ public class EventDAOImpl implements EventDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
     }
@@ -286,7 +286,7 @@ public class EventDAOImpl implements EventDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try {
                 statement = connection.prepareStatement(SQL_FOR_SET_COEFFICIENT);
                 statement.setDouble(1, coefficient);
@@ -305,7 +305,7 @@ public class EventDAOImpl implements EventDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
     }

@@ -20,12 +20,12 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
     private final static Logger LOG = LogManager.getLogger(UserServiceImpl.class);
-    private static final UserServiceImpl instance = new UserServiceImpl();
+    private static final UserServiceImpl INSTANCE = new UserServiceImpl();
     private UserDAO userDAO;
     private RateDAO rateDAO;
 
     public static UserServiceImpl getInstance(){
-        return instance;
+        return INSTANCE;
     }
 
     private UserServiceImpl(){

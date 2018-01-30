@@ -24,7 +24,7 @@ import java.util.Random;
 
 public class EventResultServiceImpl implements EventResultService {
     private final static Logger LOG = LogManager.getLogger(EventResultServiceImpl.class);
-    private static final EventResultServiceImpl instance = new EventResultServiceImpl();
+    private static final EventResultServiceImpl INSTANCE = new EventResultServiceImpl();
     private static final int STATISTIC_MAX_SCORE = 10;
 
     private EventResultDAO eventResultDAO;
@@ -34,7 +34,7 @@ public class EventResultServiceImpl implements EventResultService {
     private MemberDAO memberDAO;
 
     public static EventResultService getInstance(){
-        return instance;
+        return INSTANCE;
     }
 
     private EventResultServiceImpl(){

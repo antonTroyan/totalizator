@@ -19,11 +19,11 @@ import java.util.List;
 public class MemberServiceImpl implements MemberService {
 
     private final static Logger LOG = LogManager.getLogger(MemberServiceImpl.class);
-    private static final MemberServiceImpl instance = new MemberServiceImpl();
+    private static final MemberServiceImpl INSTANCE = new MemberServiceImpl();
     private MemberDAO memberDAO;
 
     public static MemberServiceImpl getInstance(){
-        return instance;
+        return INSTANCE;
     }
 
     private MemberServiceImpl(){

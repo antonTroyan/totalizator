@@ -4,7 +4,6 @@ import by.troyan.web.dao.UserDAO;
 import by.troyan.web.dao.exception.DAOException;
 import by.troyan.web.database.ConnectionPool;
 import by.troyan.web.entity.User;
-import by.troyan.web.exception.UserException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,8 +18,6 @@ import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
     private final static Logger LOG = LogManager.getLogger(UserDAOImpl.class);
-    private static final UserDAOImpl instance = new UserDAOImpl();
-    private final ConnectionPool pool = ConnectionPool.getConnectionPool();
     private static final String SQL_FOR_GET_ALL_USERS = "SELECT * FROM `user`";
     private static final String SQL_FOR_CREATE_USER = "INSERT INTO `user`(`login`, `pass_hash`, `email`) VALUES (?, ?, ?);";
     private static final String SQL_FOR_GET_USER_BY_LOGIN = "SELECT `login`, `pass_hash` , `role`, `banned` " +
@@ -66,11 +63,13 @@ public class UserDAOImpl implements UserDAO {
             "WHERE `login` = ?;";
     private static final String SQL_FOR_CHECK_IS_EMAIL_FREE = "SELECT `email` FROM `user` " +
             "WHERE `email` = ?;";
+    private static final UserDAOImpl INSTANCE = new UserDAOImpl();
+    private static final ConnectionPool CONNECTION_POOL = ConnectionPool.getConnectionPool();
 
     private UserDAOImpl() {}
 
     public static UserDAOImpl getInstance(){
-        return instance;
+        return INSTANCE;
     }
 
     public List<User> getAllUsers() throws DAOException {
@@ -79,7 +78,7 @@ public class UserDAOImpl implements UserDAO {
         ResultSet resultSet = null;
         List<User> result = new ArrayList<User>();
         try {
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             statement = connection.createStatement();
             statement.execute(SQL_FOR_GET_ALL_USERS);
             resultSet = statement.getResultSet();
@@ -101,7 +100,7 @@ public class UserDAOImpl implements UserDAO {
             LOG.error(exc);
         }
         finally {
-            pool.returnConnectionToPool(connection);
+            CONNECTION_POOL.returnConnectionToPool(connection);
             try {
                 resultSet.close();
             }
@@ -123,7 +122,7 @@ public class UserDAOImpl implements UserDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try {
                 statement = connection.prepareStatement(SQL_FOR_CREATE_USER);
                 statement.setString(1, user.getLogin());
@@ -144,7 +143,7 @@ public class UserDAOImpl implements UserDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return user;
@@ -157,7 +156,7 @@ public class UserDAOImpl implements UserDAO {
         ResultSet resultSet = null;
         User user = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try{
                 statement = connection.prepareStatement(SQL_FOR_GET_USER_BY_LOGIN);
                 statement.setString(1, login);
@@ -191,7 +190,7 @@ public class UserDAOImpl implements UserDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return user;
@@ -204,7 +203,7 @@ public class UserDAOImpl implements UserDAO {
         ResultSet resultSet = null;
         User user = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try{
                 statement = connection.prepareStatement(SQL_FOR_GET_FULL_USER_INFORMATION_BY_LOGIN);
                 statement.setString(1, login);
@@ -240,7 +239,7 @@ public class UserDAOImpl implements UserDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return user;
@@ -253,7 +252,7 @@ public class UserDAOImpl implements UserDAO {
         ResultSet resultSet = null;
         int userId = 0;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try{
                 statement = connection.prepareStatement(SQL_FOR_GET_USER_ID_BY_LOGIN);
                 statement.setString(1, login);
@@ -283,7 +282,7 @@ public class UserDAOImpl implements UserDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return userId;
@@ -294,7 +293,7 @@ public class UserDAOImpl implements UserDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             connection.setAutoCommit(false);
             Savepoint savepoint = connection.setSavepoint();
             try {
@@ -317,7 +316,7 @@ public class UserDAOImpl implements UserDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
     }
@@ -327,7 +326,7 @@ public class UserDAOImpl implements UserDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             connection.setAutoCommit(false);
             Savepoint savepoint = connection.setSavepoint();
             try {
@@ -350,7 +349,7 @@ public class UserDAOImpl implements UserDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
     }
@@ -371,7 +370,7 @@ public class UserDAOImpl implements UserDAO {
         ResultSet resultSet = null;
         boolean result = false;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try{
                 statement = connection.prepareStatement(SQL_FOR_HAVE_MONEY);
                 statement.setBigDecimal(1, money);
@@ -403,7 +402,7 @@ public class UserDAOImpl implements UserDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return result;
@@ -414,7 +413,7 @@ public class UserDAOImpl implements UserDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try {
                 statement = connection.prepareStatement(insertListToQuery(SQL_FOR_BAN_USERS, idList));
                 statement.executeUpdate();
@@ -431,7 +430,7 @@ public class UserDAOImpl implements UserDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
     }
@@ -441,7 +440,7 @@ public class UserDAOImpl implements UserDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try {
 
                 statement = connection.prepareStatement(insertListToQuery(SQL_FOR_UNBAN_USERS, idList));
@@ -459,7 +458,7 @@ public class UserDAOImpl implements UserDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
     }
@@ -478,7 +477,7 @@ public class UserDAOImpl implements UserDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try {
                 statement = connection.prepareStatement(prepareSql(SQL_FOR_CHANGE_ROLE_FOR_USERS, idList));
                 statement.setString(1, role);
@@ -499,7 +498,7 @@ public class UserDAOImpl implements UserDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
     }
@@ -509,7 +508,7 @@ public class UserDAOImpl implements UserDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try {
                 statement = connection.prepareStatement(insertListToQuery(SQL_FOR_DELETE_USERS, idList));
                 statement.executeUpdate();
@@ -526,7 +525,7 @@ public class UserDAOImpl implements UserDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
     }
@@ -536,7 +535,7 @@ public class UserDAOImpl implements UserDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try {
                 statement = connection.prepareStatement(SQL_FOR_MARK_USER_AS_DEBTOR, userId);
                 statement.setInt(1, userId);
@@ -554,7 +553,7 @@ public class UserDAOImpl implements UserDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
     }
@@ -564,7 +563,7 @@ public class UserDAOImpl implements UserDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try {
                 statement = connection.prepareStatement(SQL_FOR_REMOVE_DEBTOR_MARK);
                 statement.setInt(1, userId);
@@ -582,7 +581,7 @@ public class UserDAOImpl implements UserDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
     }
@@ -595,7 +594,7 @@ public class UserDAOImpl implements UserDAO {
         boolean isDebtor = false;
 
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try {
                 statement = connection.prepareStatement(SQL_FOR_CHECK_IS_DEBTOR);
                 statement.setInt(1, userId);
@@ -616,7 +615,7 @@ public class UserDAOImpl implements UserDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return isDebtor;
@@ -630,7 +629,7 @@ public class UserDAOImpl implements UserDAO {
         boolean isLoginFree = false;
 
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try {
                 statement = connection.prepareStatement(SQL_FOR_CHECK_IS_LOGIN_FREE);
                 statement.setString(1, login);
@@ -652,7 +651,7 @@ public class UserDAOImpl implements UserDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return isLoginFree;
@@ -666,7 +665,7 @@ public class UserDAOImpl implements UserDAO {
         boolean isEmailFree = false;
 
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try {
                 statement = connection.prepareStatement(SQL_FOR_CHECK_IS_EMAIL_FREE);
                 statement.setString(1, email);
@@ -687,7 +686,7 @@ public class UserDAOImpl implements UserDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
 

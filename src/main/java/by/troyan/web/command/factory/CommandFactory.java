@@ -12,13 +12,13 @@ import java.util.Map;
  * This class used to create object of particular command by a String
  * using createCommand(CommandEnum command) metod. <p>
  * Contains command map with keys - enums and values - objects.
- * Have one method to receive command from the factory.
+ * Have one method to receive command from the FACTORY.
  */
 
 public class CommandFactory {
-    private static final CommandFactory factory = new CommandFactory();
+    private static final CommandFactory FACTORY = new CommandFactory();
     public static CommandFactory getFactory(){
-        return factory;
+        return FACTORY;
     }
 
     private Map<CommandEnum, ICommand> commands;

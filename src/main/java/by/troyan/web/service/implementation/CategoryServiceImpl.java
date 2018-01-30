@@ -16,12 +16,12 @@ import org.apache.logging.log4j.Logger;
 
 public class CategoryServiceImpl implements CategoryService {
     private final static Logger LOG = LogManager.getLogger(CategoryServiceImpl.class);
-    private static final CategoryServiceImpl instance = new CategoryServiceImpl();
+    private static final CategoryServiceImpl INSTANCE = new CategoryServiceImpl();
 
     private CategoryDAO categoryDAO;
 
     public static CategoryServiceImpl getInstance(){
-        return instance;
+        return INSTANCE;
     }
 
     private CategoryServiceImpl(){

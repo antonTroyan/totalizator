@@ -20,7 +20,7 @@ import java.io.IOException;
  */
 
 public class MainServlet extends HttpServlet {
-    private static final CommandFactory commandFactory = CommandFactory.getFactory();
+    private static final CommandFactory COMMAND_FACTORY = CommandFactory.getFactory();
     private final static Logger LOG = LogManager.getLogger(MainServlet.class);
 
     @Override
@@ -42,7 +42,7 @@ public class MainServlet extends HttpServlet {
 
         try {
             CommandEnum commandEnum = CommandEnum.getEnum(commandName);
-            command = commandFactory.createCommand(commandEnum);
+            command = COMMAND_FACTORY.createCommand(commandEnum);
             command.execute(req, resp);
         } catch (UnauthorizedException exc){
             LOG.error(exc);

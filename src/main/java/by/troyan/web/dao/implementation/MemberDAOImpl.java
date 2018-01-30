@@ -37,11 +37,11 @@ public class MemberDAOImpl implements MemberDAO {
             "ON `eventmember`.`member_id` = `event_m2m_eventmember`.`member_id` " +
             "WHERE `event_m2m_eventmember`.`event_id` = ?;";
 
-    private static final MemberDAOImpl instance = new MemberDAOImpl();
-    private static final ConnectionPool pool = ConnectionPool.getConnectionPool();
+    private static final MemberDAOImpl INSTANCE = new MemberDAOImpl();
+    private static final ConnectionPool CONNECTION_POOL = ConnectionPool.getConnectionPool();
 
     public static MemberDAOImpl getInstance(){
-        return instance;
+        return INSTANCE;
     }
 
     private MemberDAOImpl(){}
@@ -54,7 +54,7 @@ public class MemberDAOImpl implements MemberDAO {
         List<Member> result = new ArrayList<>();
 
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try{
                 statement = connection.prepareStatement(SQL_FOR_GET_MEMBERS_BY_LEAGUE);
                 statement.setInt(1, leagueId);
@@ -89,7 +89,7 @@ public class MemberDAOImpl implements MemberDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
 
@@ -108,7 +108,7 @@ public class MemberDAOImpl implements MemberDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try {
                 statement = connection.prepareStatement(SQL_FOR_ATTACH_MEMBER_TO_EVENT);
                 statement.setInt(1, eventId);
@@ -127,7 +127,7 @@ public class MemberDAOImpl implements MemberDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
     }
@@ -139,7 +139,7 @@ public class MemberDAOImpl implements MemberDAO {
         ResultSet resultSet = null;
         List<Member> result = new ArrayList<>();
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try{
                 statement = connection.prepareStatement(SQL_FOR_GET_MEMBERS_BY_EVENT);
                 statement.setInt(1, eventId);
@@ -174,7 +174,7 @@ public class MemberDAOImpl implements MemberDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
 
@@ -188,7 +188,7 @@ public class MemberDAOImpl implements MemberDAO {
         ResultSet resultSet = null;
         String result = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try{
                 statement = connection.prepareStatement(SQL_FOR_GET_MEMBER_NAME_BY_ID);
                 statement.setInt(1, memberId);
@@ -219,7 +219,7 @@ public class MemberDAOImpl implements MemberDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
 
@@ -231,7 +231,7 @@ public class MemberDAOImpl implements MemberDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try {
                 statement = connection.prepareStatement(SQL_FOR_ADD_MEMBER);
                 statement.setInt(1, member.getLeagueId());
@@ -250,7 +250,7 @@ public class MemberDAOImpl implements MemberDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return member;

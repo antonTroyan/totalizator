@@ -28,11 +28,11 @@ public class LeagueDAOImpl implements LeagueDAO {
             "WHERE `event_category_id` = ?;";
 
 
-    private static final LeagueDAOImpl instance = new LeagueDAOImpl();
-    private static final ConnectionPool pool = ConnectionPool.getConnectionPool();
+    private static final LeagueDAOImpl INSTANCE = new LeagueDAOImpl();
+    private static final ConnectionPool CONNECTION_POOL = ConnectionPool.getConnectionPool();
 
     public static LeagueDAOImpl getInstance(){
-        return instance;
+        return INSTANCE;
     }
 
     private LeagueDAOImpl(){}
@@ -51,7 +51,7 @@ public class LeagueDAOImpl implements LeagueDAO {
         ResultSet resultSet = null;
         List<League> result = new ArrayList<>();
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try{
                 statement = connection.prepareStatement(SQL_FOR_GET_LEAGUES_BY_CATEGORY);
                 statement.setInt(1, categoryId);
@@ -82,7 +82,7 @@ public class LeagueDAOImpl implements LeagueDAO {
             throw new DAOException(exc);
         } finally{
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return result;
@@ -93,7 +93,7 @@ public class LeagueDAOImpl implements LeagueDAO {
         Connection connection = null;
         PreparedStatement statement = null;
         try{
-            connection = pool.getConnection();
+            connection = CONNECTION_POOL.getConnection();
             try {
                 statement = connection.prepareStatement(SQL_FOR_ADD_LEAGUE);
                 statement.setInt(1, league.getCategoryId());
@@ -112,7 +112,7 @@ public class LeagueDAOImpl implements LeagueDAO {
             throw new DAOException(exc);
         } finally {
             if(connection != null){
-                pool.returnConnectionToPool(connection);
+                CONNECTION_POOL.returnConnectionToPool(connection);
             }
         }
         return league;

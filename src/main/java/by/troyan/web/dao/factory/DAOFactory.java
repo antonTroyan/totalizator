@@ -9,10 +9,10 @@ import by.troyan.web.dao.implementation.*;
  */
 
 public class DAOFactory {
-    private static final DAOFactory factory = new DAOFactory();
+    private static final DAOFactory FACTORY = new DAOFactory();
 
     public static DAOFactory getFactory(){
-        return factory;
+        return FACTORY;
     }
 
     public UserDAO getUserDAO(){

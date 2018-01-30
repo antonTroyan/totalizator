@@ -15,13 +15,13 @@ import java.math.BigDecimal;
 
 public class RateServiceImpl implements RateService {
     private final static Logger LOG = LogManager.getLogger(RateServiceImpl.class);
-    private static final RateServiceImpl instance = new RateServiceImpl();
+    private static final RateServiceImpl INSTANCE = new RateServiceImpl();
 
     private UserDAO userDAO;
     private RateDAO rateDAO;
 
     public static RateServiceImpl getInstance(){
-        return instance;
+        return INSTANCE;
     }
 
     private RateServiceImpl(){
