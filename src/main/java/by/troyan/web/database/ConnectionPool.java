@@ -18,14 +18,14 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
     private final static Logger LOG = LogManager.getLogger(ConnectionPool.class);
-    private static final Properties properties = DBPropertiesReader.getDBProperties();
-    private static final ConnectionPool connectionPool = new ConnectionPool(properties);
+    private static final Properties DB_PROPERTIES = TotalizatorPropertiesReader.getTotalizatorProperties();
+    private static final ConnectionPool CONNECTION_POOL = new ConnectionPool(DB_PROPERTIES);
 
     private ArrayBlockingQueue<Connection> connections;
     private ReentrantLock lockForReturnConnection;
 
     public static ConnectionPool getConnectionPool(){
-        return connectionPool;
+        return CONNECTION_POOL;
     }
 
 
@@ -33,7 +33,7 @@ public class ConnectionPool {
      * Constructor. Used to initialise pool of connections.
      *
      * @param  properties
-     *         need properties that have string poolSize with the value of
+     *         need DB_PROPERTIES that have string poolSize with the value of
      *         needed connections for pool
      */
     private ConnectionPool(Properties properties){

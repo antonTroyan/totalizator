@@ -41,17 +41,12 @@ public class MessageLocalizer {
     private static String getPureMessageFromException (String exceptionMessage){
         String result = exceptionMessage;
 
-        System.out.println(exceptionMessage + " exc message");
-
         Scanner scanner = new Scanner(exceptionMessage);
         if(scanner.findInLine(":") != null){
             String[] splittedArray = exceptionMessage.split(":");
             result = splittedArray[1].trim();
 
-            System.out.println("in scanner");
         }
-
-        System.out.println(result + " final result");
         return result;
     }
 

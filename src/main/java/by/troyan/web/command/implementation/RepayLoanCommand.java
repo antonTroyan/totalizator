@@ -4,6 +4,7 @@ import by.troyan.web.command.CommandEnum;
 import by.troyan.web.command.ICommand;
 import by.troyan.web.command.exception.CommandException;
 import by.troyan.web.command.factory.CommandFactory;
+import by.troyan.web.database.TotalizatorPropertiesReader;
 import by.troyan.web.entity.User;
 import by.troyan.web.exception.OperationException;
 import by.troyan.web.exception.UnauthorizedException;
@@ -18,8 +19,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Properties;
 
-import static by.troyan.web.support.Constant.*;
 
 public class RepayLoanCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(TakeLoanCommand.class);
@@ -33,11 +34,17 @@ public class RepayLoanCommand implements ICommand {
         String username;
 
         try {
-           username = (String)req.getSession().getAttribute("username");
-           paySystemService.withdrawMoney(username, ENTERPRISE_CARD_NUMBER, ENTERPRISE_CARD_VALIDITY_DATE, STANDARD_CREDIT_AMOUNT);
-           paySystemService.repayLoan(username);
+            username = (String) req.getSession().getAttribute("username");
 
-        }  catch(ServiceException exc){
+            Properties properties = TotalizatorPropertiesReader.getTotalizatorProperties();
+            String enterpriseCardNumber = properties.getProperty("enterpriseCardNumber");
+            String enterpriseCardValidityDate = properties.getProperty("enterpriseCardValidityDate");
+            String standardCreditAmount = properties.getProperty("standardCreditAmount");
+
+            paySystemService.withdrawMoney(username, enterpriseCardNumber, enterpriseCardValidityDate, standardCreditAmount);
+            paySystemService.repayLoan(username);
+
+        } catch (ServiceException exc) {
             LOG.error(exc);
             throw new CommandException(exc);
         }

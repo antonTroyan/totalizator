@@ -2,4 +2,4 @@
 target/*
 *.iml
 .idea/*
-src/main/resources/db.properties
+src/main/resources/totalizator.properties
