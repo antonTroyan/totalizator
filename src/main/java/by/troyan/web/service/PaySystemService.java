@@ -9,6 +9,8 @@ import by.troyan.web.service.exception.ServiceException;
  */
 
 public interface PaySystemService {
+
+    
     Operation fillUpBalance(String username, String cardNumber, String validityDate, String cardCode, String amount) throws ServiceException, OperationException;
 
     Operation withdrawMoney(String username, String cardNumber, String validityDate, String amount) throws ServiceException, OperationException;

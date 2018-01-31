@@ -19,7 +19,8 @@ public interface CategoryDAO {
 
     /**
      * Used to add category to database.
-     * @return  List of Categories.
+     * @param category Category object
+     * @return  Category object.
      */
     Category addCategory(Category category) throws DAOException;
 }

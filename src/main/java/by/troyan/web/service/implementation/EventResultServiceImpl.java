@@ -56,7 +56,11 @@ public class EventResultServiceImpl implements EventResultService {
         }
     }
 
-
+    /**
+     * Used to add random result to event.
+     * @param eventId event id
+     * @return  Event result object.
+     */
     @Override
     public EventResult addRandomResultToEvent(String eventId) throws ServiceException, EventResultException {
         EventResult eventResult = new EventResult();

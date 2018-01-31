@@ -72,6 +72,10 @@ public class UserDAOImpl implements UserDAO {
         return INSTANCE;
     }
 
+    /**
+     * Used to get List of all Users
+     * @return List of Users
+     */
     public List<User> getAllUsers() throws DAOException {
         Connection connection = null;
         Statement statement = null;
@@ -117,6 +121,11 @@ public class UserDAOImpl implements UserDAO {
         return result;
     }
 
+    /**
+     * Used to create user.
+     * @param user - User object
+     * @return User object
+     */
     @Override
     public User createUser(User user) throws DAOException {
         Connection connection = null;
@@ -149,6 +158,11 @@ public class UserDAOImpl implements UserDAO {
         return user;
     }
 
+    /**
+     * Used to get user by login.
+     * @param login - user login
+     * @return User object
+     */
     @Override
     public User getUserByLogin(String login) throws DAOException {
         Connection connection = null;
@@ -196,6 +210,11 @@ public class UserDAOImpl implements UserDAO {
         return user;
     }
 
+    /**
+     * Used to get full user information by login.
+     * @param login - user login
+     * @return User object
+     */
     @Override
     public User getFullUserInformationByLogin(String login) throws DAOException {
         Connection connection = null;
@@ -245,6 +264,11 @@ public class UserDAOImpl implements UserDAO {
         return user;
     }
 
+    /**
+     * Used to get user id by login.
+     * @param login - user login
+     * @return user id int
+     */
     @Override
     public int getUserIdByLogin(String login) throws DAOException {
         Connection connection = null;
@@ -288,6 +312,11 @@ public class UserDAOImpl implements UserDAO {
         return userId;
     }
 
+    /**
+     * Used to fill up balance by userId.
+     * @param userId - user id,
+     * @param money - amount of money to fill up
+     */
     @Override
     public void fillUpBalanceForUser(int userId, BigDecimal money) throws DAOException {
         Connection connection = null;
@@ -321,6 +350,11 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    /**
+     * Used to withdraw money from balance by userId.
+     * @param userId - user id,
+     * @param money - amount of money to withdraw
+     */
     @Override
     public void withdrawMoneyFromUser(int userId, BigDecimal money) throws DAOException {
         Connection connection = null;
@@ -363,6 +397,12 @@ public class UserDAOImpl implements UserDAO {
         return sql.replace("?", sb.toString());
     }
 
+    /**
+     * Used to check money amount on balance by userId.
+     * @param userId - user id,
+     * @param money - amount of money to check
+     * @return true - id user has enough money, false in other case
+     */
     @Override
     public boolean haveMoney(int userId, BigDecimal money) throws DAOException {
         Connection connection = null;
@@ -408,6 +448,10 @@ public class UserDAOImpl implements UserDAO {
         return result;
     }
 
+    /**
+     * Used to ban List of users by userId.
+     * @param idList - user id List
+     */
     @Override
     public void banUsers(List<Integer> idList) throws DAOException {
         Connection connection = null;
@@ -435,6 +479,10 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    /**
+     * Used to unban List of users by userId.
+     * @param idList - user id List
+     */
     @Override
     public void unbanUsers(List<Integer> idList) throws DAOException {
         Connection connection = null;
@@ -472,6 +520,11 @@ public class UserDAOImpl implements UserDAO {
         return sql.replace("&", sb.toString());
     }
 
+    /**
+     * Used to change role of List of users by userId.
+     * @param idList - user id List
+     * @param role - role that should be set for all users in list
+     */
     @Override
     public void changeRoleForUsers(List<Integer> idList, String role) throws DAOException {
         Connection connection = null;
@@ -503,6 +556,10 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    /**
+     * Used to delete List of users by userId.
+     * @param idList - user id List
+     */
     @Override
     public void deleteUsers(List<Integer> idList) throws DAOException {
         Connection connection = null;
@@ -530,6 +587,11 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    /**
+     * Used to mark user as debtor. It prevent him of taking
+     * new loan until he repay old.
+     * @param userId - user id
+     */
     @Override
     public void markUserAsDebtor(int userId) throws DAOException {
         Connection connection = null;
@@ -558,6 +620,10 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    /**
+     * Used to remove user debtor mark. After this he could take a new loan.
+     * @param userId - user id
+     */
     @Override
     public void removeDebtorMark(int userId) throws DAOException {
         Connection connection = null;
@@ -586,6 +652,10 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    /**
+     * Used to check user debtor mark. If he is debtor he could not  take a new loan.
+     * @param userId - user id
+     */
     @Override
     public boolean checkIsDebtor(int userId) throws DAOException {
         Connection connection = null;
@@ -621,6 +691,10 @@ public class UserDAOImpl implements UserDAO {
         return isDebtor;
     }
 
+    /**
+     * Prevent register user with the same login.
+     * @param login - user login
+     */
     @Override
     public boolean checkIsLoginFree(String login) throws DAOException {
         Connection connection = null;
@@ -657,6 +731,11 @@ public class UserDAOImpl implements UserDAO {
         return isLoginFree;
     }
 
+
+    /**
+     * Prevent register user with the same email.
+     * @param email - user email
+     */
     @Override
     public boolean checkIsEmailFree(String email) throws DAOException {
         Connection connection = null;

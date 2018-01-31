@@ -28,6 +28,11 @@ public class CategoryServiceImpl implements CategoryService {
         categoryDAO = DAOFactory.getFactory().getCategoryDAO();
     }
 
+    /**
+     * Used to add category.
+     * @param name Category object
+     * @return  Category object.
+     */
     @Override
     public Category addCategory(String name) throws ServiceException, CategoryException {
         Category category = new Category();

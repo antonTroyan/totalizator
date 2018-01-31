@@ -12,7 +12,19 @@ import java.util.List;
 
 
 public interface LeagueService {
+
+    /**
+     * Used get special league by its categoryId.
+     * @param categoryId event id
+     * @return  list of Leagues
+     */
     List<League> getLeaguesByCategory(int categoryId) throws ServiceException;
 
+    /**
+     * Used add league.
+     * @param categoryId event id
+     * @param  name name of league
+     * @return League object
+     */
     League addLeague(String name, String categoryId) throws ServiceException, LeagueException;
 }

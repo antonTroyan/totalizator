@@ -29,6 +29,11 @@ public class LeagueServiceImpl implements LeagueService {
         leagueDAO = DAOFactory.getFactory().getLeagueDAO();
     }
 
+    /**
+     * Used get special league by its categoryId.
+     * @param categoryId event id
+     * @return  list of Leagues
+     */
     @Override
     public List<League> getLeaguesByCategory(int categoryId) throws ServiceException {
         try {
@@ -39,6 +44,12 @@ public class LeagueServiceImpl implements LeagueService {
         }
     }
 
+    /**
+     * Used add league.
+     * @param name name of league
+     * @param categoryId event id
+     * @return League object
+     */
     @Override
     public League addLeague(String name, String categoryId) throws ServiceException, LeagueException {
         League league = new League();

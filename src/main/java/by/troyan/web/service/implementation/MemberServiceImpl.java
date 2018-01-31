@@ -30,6 +30,11 @@ public class MemberServiceImpl implements MemberService {
         memberDAO = DAOFactory.getFactory().getMemberDAO();
     }
 
+    /**
+     * Used get list of members with one league.
+     * @param leagueId league id
+     * @return  list of Members
+     */
     @Override
     public List<Member> getMembersByLeague(int leagueId) throws ServiceException {
         try{
@@ -40,6 +45,11 @@ public class MemberServiceImpl implements MemberService {
         }
     }
 
+    /**
+     * Used get list of members by eventId.
+     * @param eventId event id
+     * @return  list of Members
+     */
     @Override
     public List<Member> getMembersByEvent(int eventId) throws ServiceException {
         try{
@@ -50,6 +60,13 @@ public class MemberServiceImpl implements MemberService {
         }
     }
 
+    /**
+     * Used add member.
+     * @param name member name
+     * @param categoryId id of category
+     * @param leagueId id of league
+     * @return  Member object
+     */
     @Override
     public Member addMember(String name, String categoryId, String leagueId) throws ServiceException, MemberException {
         Member member = new Member();

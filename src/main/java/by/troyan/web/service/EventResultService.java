@@ -10,7 +10,11 @@ import by.troyan.web.service.exception.ServiceException;
 
 public interface EventResultService {
 
+    /**
+     * Used to add random result to event.
+     * @param eventId event id
+     * @return  Event result object.
+     */
     EventResult addRandomResultToEvent (String eventId) throws ServiceException, EventResultException;
-
 
 }

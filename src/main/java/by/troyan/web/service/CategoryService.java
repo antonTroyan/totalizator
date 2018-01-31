@@ -9,5 +9,11 @@ import by.troyan.web.service.exception.ServiceException;
  */
 
 public interface CategoryService {
+
+    /**
+     * Used to add category.
+     * @param name Category object
+     * @return  Category object.
+     */
     Category addCategory(String name) throws ServiceException, CategoryException;
 }
