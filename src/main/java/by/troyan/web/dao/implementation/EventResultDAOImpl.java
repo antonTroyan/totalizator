@@ -36,6 +36,11 @@ public class EventResultDAOImpl implements EventResultDAO {
         return INSTANCE;
     }
 
+    /**
+     * Set event result in database.
+     * @param eventResult
+     * @return eventResult object
+     */
     @Override
     public EventResult addEventResult(EventResult eventResult) throws DAOException {
         Connection connection = null;
@@ -69,6 +74,11 @@ public class EventResultDAOImpl implements EventResultDAO {
         return eventResult;
     }
 
+    /**
+     * Allow to receive EventResult object from database by eventId.
+     * @param eventId
+     * @return eventResult object
+     */
     @Override
     public EventResult getEventResultByEvent(int eventId) throws DAOException {
         EventResult eventResult = null;

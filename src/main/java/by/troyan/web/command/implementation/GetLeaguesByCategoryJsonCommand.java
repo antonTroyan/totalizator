@@ -16,11 +16,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Command to help JS work with Leagues.
+ */
+
 public class GetLeaguesByCategoryJsonCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(GetLeaguesByCategoryJsonCommand.class);
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, CommandException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException,
+            CommandException {
         LeagueService leagueService = ServiceFactory.getInstance().getLeagueService();
         int categoryId = Integer.parseInt(req.getParameter("categoryId"));
         List<League> leagues;

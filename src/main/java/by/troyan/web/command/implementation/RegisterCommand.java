@@ -19,6 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ *  Command to register. It checks duplicate login and email.
+ */
+
 public class RegisterCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(RegisterCommand.class);
 

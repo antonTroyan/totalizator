@@ -20,6 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ *  Command to login. Check login and password.
+ */
+
 public class LoginCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(LoginCommand.class);
 

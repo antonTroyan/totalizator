@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ *  Command to show page where ADMINISTRATOR could create new member.
+ */
 
 public class ShowEventPageCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(ShowEventPageCommand.class);

@@ -1,6 +1,5 @@
 package by.troyan.web.command.implementation;
 
-
 import by.troyan.web.command.CommandEnum;
 import by.troyan.web.command.ICommand;
 import by.troyan.web.command.exception.CommandException;
@@ -19,6 +18,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+/**
+ * Command to add category. Category added to database and will shown on the main page.
+ * Also category will appear as option when ADMINISTRATOR will create event.
+ */
 
 public class AddCategoryCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(AddCategoryCommand.class);

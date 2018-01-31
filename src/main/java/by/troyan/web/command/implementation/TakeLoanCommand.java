@@ -21,7 +21,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Properties;
 
-
+/**
+ *  Command to take some fixed amount of loan ($100). This money come from the enterprise card
+ *  that`s why card data holds in properties file and get there. <p>
+ *  User could tale loan only one time, the next loan only when user will repay old.
+ */
 
 public class TakeLoanCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(TakeLoanCommand.class);

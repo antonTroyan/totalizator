@@ -17,6 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ *  Command to help JS work with Members.
+ */
+
 public class GetMembersByEventJsonCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(GetMembersByEventJsonCommand.class);
     private MemberService memberService = ServiceFactory.getInstance().getMemberService();

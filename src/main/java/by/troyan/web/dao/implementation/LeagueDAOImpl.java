@@ -44,6 +44,11 @@ public class LeagueDAOImpl implements LeagueDAO {
         return league;
     }
 
+    /**
+     * Allow to receive List of Leagues from database by categoryId.
+     * @param categoryId
+     * @return List of Leagues
+     */
     @Override
     public List<League> getLeaguesByCategory(int categoryId) throws DAOException {
         PreparedStatement statement = null;
@@ -88,6 +93,11 @@ public class LeagueDAOImpl implements LeagueDAO {
         return result;
     }
 
+    /**
+     * Allow add League to database.
+     * @param league
+     * @return League object
+     */
     @Override
     public League addLeague(League league) throws DAOException {
         Connection connection = null;

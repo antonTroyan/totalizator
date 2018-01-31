@@ -17,12 +17,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Command to delete USER from database. Activated only by ADMINISTRATOR on the special page.
+ */
+
 public class DeleteUserCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(DeleteUserCommand.class);
     private UserService userService = ServiceFactory.getInstance().getUserService();
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, CommandException, UnauthorizedException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException,
+            CommandException, UnauthorizedException {
         checkRoots(req, new User.Role[]{User.Role.ADMINISTRATOR});
         String[] stringIdList = req.getParameter("id-list").split(",");
         List<Integer> idList = new ArrayList<>();

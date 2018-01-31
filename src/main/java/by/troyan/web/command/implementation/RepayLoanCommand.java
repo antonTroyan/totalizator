@@ -21,6 +21,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ *  Command to repay loan. Only user with loan can activate this command.
+ *  Sum of the loan will be got from the account. If user will not have enough money, exception
+ *  will appear.
+ */
 
 public class RepayLoanCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(TakeLoanCommand.class);

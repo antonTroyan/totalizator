@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Command to set locale from parameter.
+ */
+
 public class ChangeLocaleCommand implements ICommand {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp)

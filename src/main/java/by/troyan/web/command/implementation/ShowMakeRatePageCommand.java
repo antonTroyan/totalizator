@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ *  Command to show make rate page.
+ */
+
 public class ShowMakeRatePageCommand implements ICommand {
 
     @Override

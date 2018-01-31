@@ -1,6 +1,5 @@
 package by.troyan.web.command.implementation;
 
-
 import by.troyan.web.command.CommandEnum;
 import by.troyan.web.command.ICommand;
 import by.troyan.web.command.exception.CommandException;
@@ -21,6 +20,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Command for ADMINISTRATOR, that allows him to create event using data he entered.
+ * Have several additional methods getRateTypes(HttpServletRequest req) and getMemberIds(HttpServletRequest req),
+ * that help to receive some data.
+ */
 
 public class AddEventCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(AddEventCommand.class);

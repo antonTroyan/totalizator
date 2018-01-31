@@ -11,7 +11,15 @@ import java.util.List;
 
 public interface CategoryDAO {
 
+    /**
+     * Used to get all categories from database.
+     * @return  List of Categories.
+     */
     List<Category> getAllCategories() throws DAOException;
 
+    /**
+     * Used to add category to database.
+     * @return  List of Categories.
+     */
     Category addCategory(Category category) throws DAOException;
 }

@@ -21,6 +21,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Command to fill up balance. Could be used by all Roles in the personal page.
+ */
+
 public class FillUpBalanceCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(FillUpBalanceCommand.class);
     private PaySystemService paySystemService = ServiceFactory.getInstance().getPaySystemService();

@@ -17,6 +17,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Command for ADMINISTRATOR to ban user. User status changed to banned and he could not enter
+ * the site until ADMINISTRATOR will unban him.
+ */
+
 public class BanCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(BanCommand.class);
     private UserService userService = ServiceFactory.getInstance().getUserService();

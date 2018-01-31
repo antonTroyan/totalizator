@@ -16,6 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ *  Command to show main page.
+ */
+
 public class ShowMainPageCommand implements ICommand {
     private EventService eventService = ServiceFactory.getInstance().getEventService();
 

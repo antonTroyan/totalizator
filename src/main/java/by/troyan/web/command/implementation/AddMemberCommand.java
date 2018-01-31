@@ -19,6 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Command for ADMINISTRATOR to add member. Then ADMINISTRATOR could choose this member when will create event.
+ */
+
 public class AddMemberCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(AddMemberCommand.class);
     private final MemberService MEMBER_SERVICE = ServiceFactory.getInstance().getMemberService();

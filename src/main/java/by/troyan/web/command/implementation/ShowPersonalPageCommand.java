@@ -15,6 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ *  Command to show personal page.
+ */
+
 public class ShowPersonalPageCommand implements ICommand {
     private UserService userService = ServiceFactory.getInstance().getUserService();
 

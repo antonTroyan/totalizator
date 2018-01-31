@@ -16,6 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ *  Command to help JS work with Leagues.
+ */
+
 public class GetMembersByLeagueJsonCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(GetMembersByLeagueJsonCommand.class);
 

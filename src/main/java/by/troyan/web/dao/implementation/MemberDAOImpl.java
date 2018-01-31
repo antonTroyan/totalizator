@@ -46,6 +46,11 @@ public class MemberDAOImpl implements MemberDAO {
 
     private MemberDAOImpl(){}
 
+    /**
+     * Used to get List of Members from database by leagueId.
+     * @param leagueId
+     * @return List of Members
+     */
     @Override
     public List<Member> getMembersByLeague(int leagueId) throws DAOException {
         PreparedStatement statement = null;
@@ -96,7 +101,10 @@ public class MemberDAOImpl implements MemberDAO {
         return result;
     }
 
-
+    /**
+     * Used to add Members to special event in database by evenId.
+     * @param eventId, memberIds
+     */
     @Override
     public void attachMembersToEvent(List<Integer> memberIds, int eventId) throws DAOException {
         for(Integer memberId : memberIds){
@@ -132,6 +140,11 @@ public class MemberDAOImpl implements MemberDAO {
         }
     }
 
+    /**
+     * Used to get List of Members from database by evenId.
+     * @param eventId
+     * @return List of Members
+     */
     @Override
     public List<Member> getMembersByEvent(int eventId) throws DAOException {
         PreparedStatement statement = null;
@@ -181,6 +194,11 @@ public class MemberDAOImpl implements MemberDAO {
         return result;
     }
 
+    /**
+     * Used to get member name by it`s memberId.
+     * @param memberId - id of member
+     * @return String of member name
+     */
     @Override
     public String getMemberNameById(int memberId) throws DAOException {
         PreparedStatement statement = null;
@@ -226,6 +244,11 @@ public class MemberDAOImpl implements MemberDAO {
         return result;
     }
 
+    /**
+     * Used to add some Member in the database.
+     * @param member - object Member
+     * @return Member object
+     */
     @Override
     public Member addMember(Member member) throws DAOException {
         Connection connection = null;

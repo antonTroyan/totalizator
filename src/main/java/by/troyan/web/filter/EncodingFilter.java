@@ -6,7 +6,7 @@ import javax.servlet.annotation.WebInitParam;
 import java.io.IOException;
 
 /**
- * EncodingFilter. Catch all requests and set right encoding"
+ * EncodingFilter. Catch all requests and set right encoding.
  */
 
 @WebFilter(urlPatterns = { "/*" },

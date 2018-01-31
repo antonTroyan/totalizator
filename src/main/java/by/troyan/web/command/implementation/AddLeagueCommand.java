@@ -19,6 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Command that helps ADMINISTRATOR to add league. After adding league will be shown in options
+ * when creating event.
+ */
+
 public class AddLeagueCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(AddLeagueCommand.class);
     private final LeagueService leagueService = ServiceFactory.getInstance().getLeagueService();

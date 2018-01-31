@@ -67,6 +67,11 @@ public class RateDAOImpl implements RateDAO {
         return INSTANCE;
     }
 
+    /**
+     * Used to get active Rates for special user.
+     * @param userId - int user id
+     * @return List of Rates
+     */
     @Override
     public List<Rate> getActiveRatesForUser(int userId) throws DAOException {
         List<Rate> result = new ArrayList<>();
@@ -117,6 +122,11 @@ public class RateDAOImpl implements RateDAO {
         return result;
     }
 
+    /**
+     * Used to get finished Rates for special user.
+     * @param userId - int user id
+     * @return List of Rates
+     */
     @Override
     public List<Rate> getFinishedRatesForUser(int userId) throws DAOException {
         List<Rate> result = new ArrayList<>();
@@ -168,6 +178,11 @@ public class RateDAOImpl implements RateDAO {
         return result;
     }
 
+    /**
+     * Used add Rate to database.
+     * @param rate - Rate object
+     * @return Rate
+     */
     @Override
     public Rate addRate(Rate rate) throws DAOException {
         Connection connection = null;
@@ -213,50 +228,11 @@ public class RateDAOImpl implements RateDAO {
         return rate;
     }
 
-    @Override
-    public BigDecimal getFullMoneyAmountForEvent(int eventId) throws DAOException {
-        BigDecimal result = BigDecimal.valueOf(0.0);
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        try{
-            connection = CONNECTION_POOL.getConnection();
-            try{
-                statement = connection.prepareStatement(SQL_FOR_GET_FULL_MONEY_AMOUNT_FOR_EVENT);
-                statement.setInt(1, eventId);
-                statement.execute();
-                try {
-                    resultSet = statement.getResultSet();
-                    if(resultSet.next()){
-                        result = resultSet.getBigDecimal("money");
-                    }
-                } catch (SQLException exc){
-                    LOG.error(exc);
-                    throw new DAOException(exc);
-                } finally {
-                    if(resultSet != null){
-                        resultSet.close();
-                    }
-                }
-            } catch (SQLException exc){
-                LOG.error(exc);
-                throw new DAOException(exc);
-            } finally {
-                if(statement != null){
-                    statement.close();
-                }
-            }
-        } catch (SQLException exc){
-            LOG.error(exc);
-            throw new DAOException(exc);
-        } finally {
-            if(connection != null){
-                CONNECTION_POOL.returnConnectionToPool(connection);
-            }
-        }
-        return result;
-    }
-
+    /**
+     * Used to get all Rates for event by eventId.
+     * @param eventId - int eventId
+     * @return List of Rates
+     */
     @Override
     public List<Rate> getRatesForEvent(int eventId) throws DAOException {
         PreparedStatement statement = null;
@@ -311,6 +287,10 @@ public class RateDAOImpl implements RateDAO {
         return result;
     }
 
+    /**
+     * Used set win rates.
+     * @param rate - int eventId
+     */
     @Override
     public void setWinForRate(Rate rate) throws DAOException {
         Connection connection = null;

@@ -17,6 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ *  Command to set win coefficient. It multiply the bet if user wins.
+ */
+
 public class SetCoefficientCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(SetCoefficientCommand.class);
     private EventService eventService = ServiceFactory.getInstance().getEventService();

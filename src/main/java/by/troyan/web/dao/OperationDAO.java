@@ -9,6 +9,12 @@ import by.troyan.web.exception.OperationException;
  */
 
 public interface OperationDAO {
+
+    /**
+     * Used to add Operation to database
+     * @param operation - object of Operation
+     * @return Operation object
+     */
     Operation addOperation(Operation operation) throws DAOException, OperationException;
 
 }

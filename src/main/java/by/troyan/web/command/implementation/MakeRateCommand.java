@@ -20,6 +20,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ *  Command to make rate. Based on the information chose the previous steps. All rate made by user will be shown on the
+ *  personal page.
+ */
+
 public class MakeRateCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(MakeRateCommand.class);
     private RateService rateService = ServiceFactory.getInstance().getRateService();

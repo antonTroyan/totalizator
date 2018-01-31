@@ -17,6 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ *  Command to show page where ADMINISTRATOR could delete users, change ROLES, ban and unban.
+ */
+
 public class ShowAdminPageCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(ShowAdminPageCommand.class);
     private UserService userService = ServiceFactory.getInstance().getUserService();

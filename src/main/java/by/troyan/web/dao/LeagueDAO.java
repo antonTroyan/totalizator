@@ -11,7 +11,18 @@ import java.util.List;
  */
 
 public interface LeagueDAO {
+
+    /**
+     * Allow to receive List of Leagues from database by categoryId.
+     * @param categoryId
+     * @return List of Leagues
+     */
     List<League> getLeaguesByCategory(int categoryId) throws DAOException;
 
+    /**
+     * Allow add League to database.
+     * @param league
+     * @return League object
+     */
     League addLeague(League league) throws DAOException;
 }

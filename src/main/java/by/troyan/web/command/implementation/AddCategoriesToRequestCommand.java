@@ -13,6 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * This class is used to add all categories to request. For example to show them
+ * on the main page.
+ */
+
 public class AddCategoriesToRequestCommand implements ICommand {
 
     private final static Logger LOG = LogManager.getLogger(AddCategoriesToRequestCommand.class);

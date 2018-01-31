@@ -34,6 +34,11 @@ public class OperationDAOImpl implements OperationDAO {
         return INSTANCE;
     }
 
+    /**
+     * Used to add Operation to database
+     * @param operation - object of Operation
+     * @return Operation object
+     */
     @Override
     public Operation addOperation(Operation operation) throws DAOException {
         Connection connection = null;

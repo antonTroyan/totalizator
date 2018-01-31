@@ -17,6 +17,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *  Command that allow ADMINISTRATOR to unban user.
+ */
+
 public class UnbanCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(UnbanCommand.class);
     private UserService userService = ServiceFactory.getInstance().getUserService();

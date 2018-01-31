@@ -19,6 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ *  Command to withdraw money. User fill the form with the card data and money send there.
+ */
+
 public class WithdrawMoneyCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(WithdrawMoneyCommand.class);
     private PaySystemService paySystemService = ServiceFactory.getInstance().getPaySystemService();

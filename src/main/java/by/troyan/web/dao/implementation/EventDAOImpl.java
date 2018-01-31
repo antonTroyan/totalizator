@@ -125,10 +125,19 @@ public class EventDAOImpl implements EventDAO {
         return result;
     }
 
+    /**
+     * Used to get all not ended events by category.
+     * @param categoryId
+     * @return  List of Events.
+     */
     public List<Event> getAllNotEndedEventsByCategoryId(int categoryId) throws DAOException {
         return getEventsBySql(SQL_FOR_GET_ALL_NOT_ENDED_EVENTS_BY_CATEGORY_ID, categoryId);
     }
 
+    /**
+     * Used to get all ended events.
+     * @return  List of Events.
+     */
     public List<Event> getAllEndedEvents() throws DAOException {
         return getEventsBySql(SQL_FOR_GET_ALL_ENDED_EVENTS);
     }
@@ -146,16 +155,30 @@ public class EventDAOImpl implements EventDAO {
         }
     }
 
+
+    /**
+     * Used to get all not ended events from database.
+     * @return  List of Events.
+     */
     @Override
     public List<Event> getAllNotEndedEvents() throws DAOException {
         return getEventsBySql(SQL_GOR_GET_ALL_NOT_ENDED_EVENTS);
     }
 
+    /**
+     * Used to get all not ended events from database sorted by date.
+     * @return  List of Events.
+     */
     @Override
     public List<Event> getAllNotEndedEventsSortedByDate() throws DAOException {
         return getEventsBySql(SQL_FOR_GET_ALL_NOT_ENDED_EVENTS_SORTED_BY_DATE);
     }
 
+    /**
+     * Used to get all ended events.
+     * @param eventId
+     * @return Event object.
+     */
     @Override
     public Event getEventById(int eventId) throws DAOException{
         Event event = null;
@@ -208,6 +231,11 @@ public class EventDAOImpl implements EventDAO {
         return event;
     }
 
+    /**
+     * Used to add event to database.
+     * @param event
+     * @return Event object.
+     */
     @Override
     public Event addEvent(Event event) throws DAOException {
         Connection connection = null;
@@ -254,6 +282,10 @@ public class EventDAOImpl implements EventDAO {
         return event;
     }
 
+    /**
+     * Used to change status of event in database.
+     * @param eventId
+     */
     @Override
     public void finishEvent(int eventId) throws DAOException {
         Connection connection = null;
@@ -281,6 +313,11 @@ public class EventDAOImpl implements EventDAO {
             }
         }
     }
+
+    /**
+     * Used to set event coefficient in database.
+     * @param eventId
+     */
     @Override
     public void setEventCoefficient(int eventId, double coefficient) throws DAOException {
         Connection connection = null;

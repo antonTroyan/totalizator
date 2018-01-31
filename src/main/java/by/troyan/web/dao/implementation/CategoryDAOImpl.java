@@ -29,6 +29,10 @@ public class CategoryDAOImpl implements CategoryDAO {
         return INSTANCE;
     }
 
+    /**
+     * Used to get all categories from database.
+     * @return  List of Categories.
+     */
     public List<Category> getAllCategories() throws DAOException {
         Connection connection = null;
         Statement statement = null;
@@ -76,6 +80,10 @@ public class CategoryDAOImpl implements CategoryDAO {
         return category;
     }
 
+    /**
+     * Used to add category to database.
+     * @return  List of Categories.
+     */
     @Override
     public Category addCategory(Category category) throws DAOException {
         Connection connection = null;

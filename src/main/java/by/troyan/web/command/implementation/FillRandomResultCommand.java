@@ -19,12 +19,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Command activated by ADMINISTRATOR, to fill random result. Could be activated only
+ * on the ended events.
+ */
+
 public class FillRandomResultCommand implements ICommand {
     private final static Logger LOG = LogManager.getLogger(FillRandomResultCommand.class);
     private EventResultService eventResultService = ServiceFactory.getInstance().getEventResultService();
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, CommandException, UnauthorizedException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException,
+            CommandException, UnauthorizedException {
         checkRoots(req, new User.Role[]{User.Role.ADMINISTRATOR});
         String eventId = req.getParameter("eventId");
 
