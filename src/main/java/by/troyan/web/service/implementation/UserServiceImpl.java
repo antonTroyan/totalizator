@@ -58,6 +58,14 @@ public class UserServiceImpl implements UserService {
         return isValid;
     }
 
+    /**
+     * Operation to register user.
+     * @param login user login
+     * @param password user password
+     * @param confirmPassword confirmation password
+     * @param email user email
+     * @return User object
+     */
     @Override
     public User registerUser(String login, String password, String confirmPassword, String email)
             throws ServiceException {
@@ -83,6 +91,12 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    /**
+     * Operation to login user.
+     * @param login user login
+     * @param password user password
+     * @return User object
+     */
     @Override
     public User login(String login, String password) throws ServiceException, UserException {
         try {
@@ -104,6 +118,11 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Operation to get full information about user.
+     * @param login user login
+     * @return User object
+     */
     @Override
     public User getFullUserInformationByLogin(String login) throws ServiceException {
         try {
@@ -117,6 +136,10 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Operation to get list of Users.
+     * @return list of Users
+     */
     @Override
     public List<User> getAllUsers() throws ServiceException {
         try{
@@ -127,6 +150,10 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Operation to ban list of Users.
+     * @param  idList list of ids of users
+     */
     @Override
     public void banUsers(List<Integer> idList) throws ServiceException {
         try{
@@ -137,6 +164,10 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Operation to unban list of Users.
+     * @param  idList list of ids of users
+     */
     @Override
     public void unbanUsers(List<Integer> idList) throws ServiceException {
         try{
@@ -147,6 +178,10 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Operation to change roles to list of Users.
+     * @param  idList list of ids of users
+     */
     @Override
     public void changeRoleForUsers(List<Integer> idList, String role) throws ServiceException {
         try{
@@ -157,6 +192,10 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Operation to delete list of Users.
+     * @param  idList list of ids of users
+     */
     @Override
     public void deleteUsers(List<Integer> idList) throws ServiceException {
         try{
@@ -167,6 +206,10 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Used to check is user a debtor.
+     * @param  login user login
+     */
     @Override
     public boolean checkIsDebtor(String login) throws ServiceException {
         boolean isDebtor = false;

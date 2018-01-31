@@ -34,6 +34,15 @@ public class PaySystemServiceImpl implements PaySystemService {
         userDAO = DAOFactory.getFactory().getUserDAO();
     }
 
+    /**
+     * Operation to fill up balance.
+     * @param username username
+     * @param cardNumber number of card
+     * @param validityDate validity date
+     * @param cardCode code of card
+     * @param amount amount to fill up
+     * @return  operation object
+     */
     @Override
     public Operation fillUpBalance(String username, String cardNumber, String validityDate, String cardCode, String amount)
             throws ServiceException, OperationException {
@@ -73,6 +82,14 @@ public class PaySystemServiceImpl implements PaySystemService {
         return operation;
     }
 
+    /**
+     * Operation to withdraw money.
+     * @param username username
+     * @param cardNumber number of card
+     * @param validityDate validity date
+     * @param amount amount to withdraw
+     * @return  operation object
+     */
     @Override
     public Operation withdrawMoney(String username, String cardNumber, String validityDate, String amount) throws ServiceException, OperationException {
         Operation operation = new Operation();
@@ -111,6 +128,10 @@ public class PaySystemServiceImpl implements PaySystemService {
         return operation;
     }
 
+    /**
+     * Operation to take loan.
+     * @param username username
+     */
     @Override
     public void takeLoan(String username) throws ServiceException {
         try{
@@ -121,6 +142,10 @@ public class PaySystemServiceImpl implements PaySystemService {
         }
     }
 
+    /**
+     * Operation to repay loan.
+     * @param username username
+     */
     @Override
     public void repayLoan(String username) throws ServiceException {
         try{
