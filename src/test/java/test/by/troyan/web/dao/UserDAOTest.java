@@ -9,8 +9,6 @@ import by.troyan.web.dao.implementation.UserDAOImpl;
 import by.troyan.web.entity.User;
 import java.util.List;
 
-
-
 public class UserDAOTest {
     private final static Logger LOG = LogManager.getLogger("UserDAOTest");
 

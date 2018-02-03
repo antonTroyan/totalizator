@@ -150,7 +150,6 @@ public class EventResultServiceImpl implements EventResultService {
 //        })).run();
 //    }
 
-
     private void distributePrize(EventResult eventResult){
 
         (new Thread(() -> {
